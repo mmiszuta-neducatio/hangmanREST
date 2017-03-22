@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+  api:
+    container_name: hangmanAPI
+    image: node:latest
+    volumes:
+      - ".:/hangmanAPI" 
+    working_dir: /hangmanAPI
+    tty: true
+    stdin_open: true
+
+  db:
+    container_name: hangmanDB
+    image: redis:latest
+    command: redis-server --appendonly yes
+    volumes:
+      - ./data:/data
