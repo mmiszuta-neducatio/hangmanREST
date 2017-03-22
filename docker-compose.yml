@@ -4,8 +4,10 @@ services:
   api:
     container_name: hangmanAPI
     image: node:latest
+    ports:
+      - "3000:3000"
     volumes:
-      - ".:/hangmanAPI" 
+      - .:/hangmanAPI
     working_dir: /hangmanAPI
     tty: true
     stdin_open: true
