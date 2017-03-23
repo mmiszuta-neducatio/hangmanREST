@@ -3,7 +3,7 @@
 let Hangman = function Hangman(word, attemptedLetters, guessedLetters, attempts) {
   this.word = word.toUpperCase();
   this.attemptedLetters = attemptedLetters || [];
-  this.guessedLetters = guessedLetters || [];
+  this.guessedLetters = guessedLetters || new Array(word.length);
   this.attempts = attempts || 0;
 };
 
