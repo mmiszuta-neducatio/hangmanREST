@@ -5,7 +5,7 @@ let Hangman = function Hangman(word, attemptedLetters, guessedLetters, attempts)
   this.attemptedLetters = attemptedLetters || [];
   this.guessedLetters = guessedLetters || [];
   this.attempts = attempts || 0;
-}
+};
 
 Hangman.prototype = {
   maxAttempts: 6,
@@ -13,11 +13,11 @@ Hangman.prototype = {
   isGameOver: function() {
     if (this.attempts >= this.maxAttempts) {
       return { 'isGameOver': true, 'gameOverType': 'loss' };
-    } 
+    }
     if (this.guessedLetters.join('') === this.word) {
       return { 'isGameOver': true, 'gameOverType': 'win' };
     }
-    return { 'isGameOver': false }
+    return { 'isGameOver': false };
   },
 
   validateLetter: function(letter) {
@@ -35,8 +35,12 @@ Hangman.prototype = {
       }
       this.attempts = this.attempts + 1;
     }
-    return isValid;
+    let response = this.isGameOver();
+    response.isValid = isValid;
+    response.guessedLetters = this.guessedLetters;
+    response.attemptedLetters = this.attemptedLetters;
+    return response;
   }
-}
+};
 
 module.exports = Hangman;
