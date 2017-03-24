@@ -9,6 +9,7 @@ services:
     volumes:
       - .:/hangmanAPI
     working_dir: /hangmanAPI
+    command: bash -c "npm install &&  npm install -g forever && forever server.js"
     tty: true
     stdin_open: true
 
