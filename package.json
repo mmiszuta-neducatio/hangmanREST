@@ -2,28 +2,29 @@
   "name": "hangman",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "test": "mocha",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mmiszuta-neducatio/slackHangmanJS.git"
+    "url": "git+https://github.com/mmiszuta-neducatio/hangmanREST.git"
   },
-  "author": "Mariusz Miszuta",
+  "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mmiszuta-neducatio/slackHangmanJS/issues"
+    "url": "https://github.com/mmiszuta-neducatio/hangmanREST/issues"
   },
-  "homepage": "https://github.com/mmiszuta-neducatio/slackHangmanJS#readme",
+  "homepage": "https://github.com/mmiszuta-neducatio/hangmanREST#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  },
   "dependencies": {
     "animals": "0.0.3",
     "connect-redis": "^3.2.0",
     "express": "^4.15.2",
     "express-session": "^1.15.1",
-    "http": "0.0.0",
-    "path": "^0.12.7",
     "redis": "^2.7.1"
   }
 }
