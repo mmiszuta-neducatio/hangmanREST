@@ -15,9 +15,9 @@ let Hangman = function Hangman(word, attemptedLetters, guessedLetters, attempts)
 Hangman.prototype = {
   maxAttempts: 6,
 
-  isWordGuessed: function(guessed, word) {
-    for(let i = guessed.length; i--;) {
-      if(guessed[i] !== word[i]){
+  isWordGuessed: function(validLetters, word) {
+    for(let i = 0; i < word.length; i++) {
+      if(validLetters[i] !== word[i]){
         return false;
       }
     }
