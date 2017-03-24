@@ -12,7 +12,7 @@ services:
     tty: true
     stdin_open: true
 
-  db:
+  redis:
     container_name: hangmanDB
     image: redis:latest
     command: redis-server --appendonly yes
