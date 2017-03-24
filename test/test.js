@@ -41,20 +41,27 @@ describe('Server', function () {
     });
   });
   it('/letter/a should GET a response object', function () {
-    chai.request(server)
+  chai.request(server)
     .get('/game')
-    .end(function(err, res) {
+    .end(function (err) {
       if (err) {
-        console.error(err);
+        throw (err);
       }
-      res.should.have.status(200);
-      res.body.should.be.a('object');
-      expect(body).to.have.property('isGameOver');
-      expect(body).to.have.property('isValid');
-      expect(body).to.have.property('guessedLetters');
-      expect(body).to.have.property('attemptedLetters');
-      expect(body).to.have.property('remainingAttempts');
-      expect(body).to.have.property('gameStats');
+      chai.request(server)
+        .get('/letter/a')
+        .end(function (err, res) {
+          if (err) {
+            throw (err);
+          }
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          expect(body).to.have.property('isGameOver');
+          expect(body).to.have.property('isValid');
+          expect(body).to.have.property('guessedLetters');
+          expect(body).to.have.property('attemptedLetters');
+          expect(body).to.have.property('remainingAttempts');
+          expect(body).to.have.property('gameStats');
+        });
+      });
     });
   });
-});
