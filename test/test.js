@@ -1,7 +1,10 @@
 'use strict';
 
+const chai   = require('chai');
+const chaiHttp = require('chai-http');
 const expect = require('chai').expect;
 const Hangman = require('../hangman');
+const server = require('../server');
 
 describe('Hangman', function () {
   it('game should end if the word has been guessed (should return true if the game is over)', function () {
@@ -19,5 +22,39 @@ describe('Hangman', function () {
   it('should have gameOverType: loss, if the game is lost', function () {
     let hangman = new Hangman('war', ['D', 'M', 'W', 'A', 'S'], ['W', 'A'], 5);
     expect(hangman.validateLetter('g').gameOverType).to.be.equal('loss');
+  });
+});
+
+chai.use(chaiHttp);
+describe('Server', function () {
+  it('/game should GET a new game or an existing one if it was created earlier', function () {
+    chai.request(server)
+    .get('/game')
+    .end(function(err, res) {
+      if (err) {
+        console.error(err);
+      }
+      res.should.have.status(200);
+      res.body.should.be.a('object');
+      expect(body).to.have.property('guessedLetters');
+      expect(body).to.have.property('gameStats');
+    });
+  });
+  it('/letter/a should GET a response object', function () {
+    chai.request(server)
+    .get('/game')
+    .end(function(err, res) {
+      if (err) {
+        console.error(err);
+      }
+      res.should.have.status(200);
+      res.body.should.be.a('object');
+      expect(body).to.have.property('isGameOver');
+      expect(body).to.have.property('isValid');
+      expect(body).to.have.property('guessedLetters');
+      expect(body).to.have.property('attemptedLetters');
+      expect(body).to.have.property('remainingAttempts');
+      expect(body).to.have.property('gameStats');
+    });
   });
 });

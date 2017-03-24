@@ -8,10 +8,8 @@ const Hangman     = require('./hangman');
 const redis       = require('redis');
 const animals     = require('animals');
 
-const port      = process.env.OPENSHIFT_NODEJS_PORT || 3000;
-
-app.listen(port, function () {
-  console.log('listening on port: ', port);
+app.listen(3000, function () {
+  console.log('listening on port: ', 3000);
 });
 
 let client = redis.createClient('6379', 'redis');
@@ -36,10 +34,14 @@ let gameStats = {
 };
 
 client.exists('gameStats', function(err, reply){
-  if (err) console.error(err);
+  if (err) {
+    console.error(err);
+  }
   if (reply === 1){
     client.hget('gameStats', 'won', function(err, reply){
-      if (err) console.error(err);
+      if (err) {
+        console.error(err);
+      }
       gameStats.won = reply;
     });
   } else {
@@ -52,7 +54,8 @@ client.exists('gameStats', function(err, reply){
 
 
 app.get('/game', function(req, res){
-  if(req.session && req.session.gameOverType){
+
+  if(req.session && req.session.game){
     loadGame(req.session.game);
     res.send({
       'guessedLetters': activeGame.guessedLetters,
@@ -107,3 +110,5 @@ function newGame(session, callback){
 function loadGame(gameSession){
   activeGame = new Hangman(gameSession.word, gameSession.attemptedLetters, gameSession.guessedLetters, gameSession.attempts);
 };
+
+module.exports = app; // for testing purposes
