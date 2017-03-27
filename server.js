@@ -25,6 +25,7 @@ app.use(session({
   secret: 'I have no memory of this place',
   resave: false,
   saveUninitialized: true,
+  cookie: { httpOnly: false }
 }));
 
 let activeGame;
